@@ -15,11 +15,17 @@ class QAExample(BaseModel):
 
 class JudgeResult(BaseModel):
     # TODO: Học viên định nghĩa các trường cần thiết cho kết quả đánh giá (score, reason, ...)
-    pass
+    score: int = Field(..., description="1 nếu đúng, 0 nếu sai")
+    reason: str = Field(..., description="Giải thích tại sao đúng hoặc sai")
+    missing_evidence: list[str] = Field(default_factory=list, description="Các bằng chứng còn thiếu")
+    spurious_claims: list[str] = Field(default_factory=list, description="Các khẳng định sai trong câu trả lời")
 
 class ReflectionEntry(BaseModel):
     # TODO: Học viên định nghĩa các trường cần thiết cho một mục reflection (attempt_id, lesson, strategy, ...)
-    pass
+    attempt_id: int = Field(..., description="Lần thử thứ mấy")
+    failure_reason: str = Field(..., description="Lý do câu trả lời sai")
+    lesson: str = Field(..., description="Bài học rút ra từ lần sai này")
+    next_strategy: str = Field(..., description="Chiến thuật mới cho lần thử tiếp theo")
 
 class AttemptTrace(BaseModel):
     attempt_id: int

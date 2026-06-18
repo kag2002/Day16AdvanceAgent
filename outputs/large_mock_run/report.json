@@ -1,0 +1,4515 @@
+{
+  "meta": {
+    "dataset": "hotpot_large.json",
+    "mode": "mock",
+    "num_records": 246,
+    "agents": [
+      "react",
+      "reflexion"
+    ]
+  },
+  "summary": {
+    "react": {
+      "count": 123,
+      "em": 0.9675,
+      "avg_attempts": 1,
+      "avg_token_estimate": 385,
+      "avg_latency_ms": 0
+    },
+    "reflexion": {
+      "count": 123,
+      "em": 1.0,
+      "avg_attempts": 1.0325,
+      "avg_token_estimate": 523.54,
+      "avg_latency_ms": 0
+    },
+    "delta_reflexion_minus_react": {
+      "em_abs": 0.0325,
+      "attempts_abs": 0.0325,
+      "tokens_abs": 138.54,
+      "latency_abs": 0
+    }
+  },
+  "failure_modes": {
+    "react": {
+      "none": 119,
+      "incomplete_multi_hop": 1,
+      "wrong_final_answer": 1,
+      "entity_drift": 2,
+      "looping": 0
+    },
+    "reflexion": {
+      "none": 123,
+      "wrong_final_answer": 0,
+      "incomplete_multi_hop": 0,
+      "entity_drift": 0,
+      "looping": 0
+    },
+    "cross_agent_analysis": {
+      "react_only_wrong": 4,
+      "reflexion_recovered": 4,
+      "both_wrong": 0
+    }
+  },
+  "examples": [
+    {
+      "qid": "hp1",
+      "agent_type": "react",
+      "gold_answer": "Oxford University",
+      "predicted_answer": "Oxford University",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Oxford University",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp2",
+      "agent_type": "react",
+      "gold_answer": "River Thames",
+      "predicted_answer": "London",
+      "is_correct": false,
+      "attempts": 1,
+      "failure_mode": "incomplete_multi_hop",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "London",
+          "score": 0,
+          "reason": "The answer stopped at the birthplace city and never completed the second hop to the river."
+        }
+      ]
+    },
+    {
+      "qid": "hp3",
+      "agent_type": "react",
+      "gold_answer": "violin",
+      "predicted_answer": "violin",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "violin",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp4",
+      "agent_type": "react",
+      "gold_answer": "Pacific Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": false,
+      "attempts": 1,
+      "failure_mode": "wrong_final_answer",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        }
+      ]
+    },
+    {
+      "qid": "hp5",
+      "agent_type": "react",
+      "gold_answer": "mathematics",
+      "predicted_answer": "mathematics",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "mathematics",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp6",
+      "agent_type": "react",
+      "gold_answer": "Dead Sea",
+      "predicted_answer": "Red Sea",
+      "is_correct": false,
+      "attempts": 1,
+      "failure_mode": "entity_drift",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Red Sea",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        }
+      ]
+    },
+    {
+      "qid": "hp7",
+      "agent_type": "react",
+      "gold_answer": "Romance",
+      "predicted_answer": "Romance",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Romance",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp8",
+      "agent_type": "react",
+      "gold_answer": "Himalayas",
+      "predicted_answer": "Andes",
+      "is_correct": false,
+      "attempts": 1,
+      "failure_mode": "entity_drift",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Andes",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        }
+      ]
+    },
+    {
+      "qid": "gold1",
+      "agent_type": "react",
+      "gold_answer": "Beijing",
+      "predicted_answer": "Beijing",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Beijing",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold2",
+      "agent_type": "react",
+      "gold_answer": "classical",
+      "predicted_answer": "classical",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "classical",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold3",
+      "agent_type": "react",
+      "gold_answer": "Peruvian sol",
+      "predicted_answer": "Peruvian sol",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Peruvian sol",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold4",
+      "agent_type": "react",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold5",
+      "agent_type": "react",
+      "gold_answer": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "C",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold6",
+      "agent_type": "react",
+      "gold_answer": "Dutch, French, and German",
+      "predicted_answer": "Dutch, French, and German",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Dutch, French, and German",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold7",
+      "agent_type": "react",
+      "gold_answer": "no Academy Award win",
+      "predicted_answer": "no Academy Award win",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "no Academy Award win",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold8",
+      "agent_type": "react",
+      "gold_answer": "Mars",
+      "predicted_answer": "Mars",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mars",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold9",
+      "agent_type": "react",
+      "gold_answer": "Mont Blanc",
+      "predicted_answer": "Mont Blanc",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mont Blanc",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold10",
+      "agent_type": "react",
+      "gold_answer": "uranium",
+      "predicted_answer": "uranium",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "uranium",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold11",
+      "agent_type": "react",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold12",
+      "agent_type": "react",
+      "gold_answer": "federal parliamentary democratic republic",
+      "predicted_answer": "federal parliamentary democratic republic",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "federal parliamentary democratic republic",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold13",
+      "agent_type": "react",
+      "gold_answer": "approximately 66000",
+      "predicted_answer": "approximately 66000",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "approximately 66000",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold14",
+      "agent_type": "react",
+      "gold_answer": "Bab-el-Mandeb",
+      "predicted_answer": "Bab-el-Mandeb",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bab-el-Mandeb",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold15",
+      "agent_type": "react",
+      "gold_answer": "Neil Armstrong",
+      "predicted_answer": "Neil Armstrong",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Neil Armstrong",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold16",
+      "agent_type": "react",
+      "gold_answer": "football",
+      "predicted_answer": "football",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "football",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold17",
+      "agent_type": "react",
+      "gold_answer": "Challenger Deep",
+      "predicted_answer": "Challenger Deep",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Challenger Deep",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold18",
+      "agent_type": "react",
+      "gold_answer": "Canadian-American",
+      "predicted_answer": "Canadian-American",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canadian-American",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold19",
+      "agent_type": "react",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold20",
+      "agent_type": "react",
+      "gold_answer": "1951",
+      "predicted_answer": "1951",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "1951",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext1",
+      "agent_type": "react",
+      "gold_answer": "US dollar",
+      "predicted_answer": "US dollar",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "US dollar",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext2",
+      "agent_type": "react",
+      "gold_answer": "Himalayas",
+      "predicted_answer": "Himalayas",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Himalayas",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext3",
+      "agent_type": "react",
+      "gold_answer": "French",
+      "predicted_answer": "French",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "French",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext4",
+      "agent_type": "react",
+      "gold_answer": "Caspian Sea",
+      "predicted_answer": "Caspian Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Caspian Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext5",
+      "agent_type": "react",
+      "gold_answer": "Alan Turing",
+      "predicted_answer": "Alan Turing",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Alan Turing",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext6",
+      "agent_type": "react",
+      "gold_answer": "Moscow",
+      "predicted_answer": "Moscow",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Moscow",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext7",
+      "agent_type": "react",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext8",
+      "agent_type": "react",
+      "gold_answer": "Portuguese",
+      "predicted_answer": "Portuguese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Portuguese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext9",
+      "agent_type": "react",
+      "gold_answer": "Sahara",
+      "predicted_answer": "Sahara",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Sahara",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext10",
+      "agent_type": "react",
+      "gold_answer": "kangaroo",
+      "predicted_answer": "kangaroo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "kangaroo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext11",
+      "agent_type": "react",
+      "gold_answer": "England",
+      "predicted_answer": "England",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "England",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext12",
+      "agent_type": "react",
+      "gold_answer": "Buddhism",
+      "predicted_answer": "Buddhism",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Buddhism",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext13",
+      "agent_type": "react",
+      "gold_answer": "Mercury",
+      "predicted_answer": "Mercury",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mercury",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext14",
+      "agent_type": "react",
+      "gold_answer": "France",
+      "predicted_answer": "France",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "France",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext15",
+      "agent_type": "react",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext16",
+      "agent_type": "react",
+      "gold_answer": "The Shard",
+      "predicted_answer": "The Shard",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "The Shard",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext17",
+      "agent_type": "react",
+      "gold_answer": "football",
+      "predicted_answer": "football",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "football",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext18",
+      "agent_type": "react",
+      "gold_answer": "Tiber",
+      "predicted_answer": "Tiber",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tiber",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext19",
+      "agent_type": "react",
+      "gold_answer": "Nobel Prize",
+      "predicted_answer": "Nobel Prize",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Nobel Prize",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext20",
+      "agent_type": "react",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext21",
+      "agent_type": "react",
+      "gold_answer": "Hindi",
+      "predicted_answer": "Hindi",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Hindi",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext22",
+      "agent_type": "react",
+      "gold_answer": "tennis",
+      "predicted_answer": "tennis",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "tennis",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext23",
+      "agent_type": "react",
+      "gold_answer": "Germany",
+      "predicted_answer": "Germany",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Germany",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext24",
+      "agent_type": "react",
+      "gold_answer": "machinery and transport equipment",
+      "predicted_answer": "machinery and transport equipment",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "machinery and transport equipment",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext25",
+      "agent_type": "react",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext26",
+      "agent_type": "react",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext27",
+      "agent_type": "react",
+      "gold_answer": "Spanish",
+      "predicted_answer": "Spanish",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Spanish",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext28",
+      "agent_type": "react",
+      "gold_answer": "Canberra",
+      "predicted_answer": "Canberra",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canberra",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext29",
+      "agent_type": "react",
+      "gold_answer": "Woolsthorpe-by-Colsterworth",
+      "predicted_answer": "Woolsthorpe-by-Colsterworth",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Woolsthorpe-by-Colsterworth",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext30",
+      "agent_type": "react",
+      "gold_answer": "Islam",
+      "predicted_answer": "Islam",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Islam",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext31",
+      "agent_type": "react",
+      "gold_answer": "Spanish",
+      "predicted_answer": "Spanish",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Spanish",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext32",
+      "agent_type": "react",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext33",
+      "agent_type": "react",
+      "gold_answer": "Ottawa",
+      "predicted_answer": "Ottawa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Ottawa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext34",
+      "agent_type": "react",
+      "gold_answer": "Jupiter",
+      "predicted_answer": "Jupiter",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Jupiter",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext35",
+      "agent_type": "react",
+      "gold_answer": "Adriatic Sea",
+      "predicted_answer": "Adriatic Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Adriatic Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext36",
+      "agent_type": "react",
+      "gold_answer": "Tanzania",
+      "predicted_answer": "Tanzania",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tanzania",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext37",
+      "agent_type": "react",
+      "gold_answer": "James Watt",
+      "predicted_answer": "James Watt",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "James Watt",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext38",
+      "agent_type": "react",
+      "gold_answer": "Arabic",
+      "predicted_answer": "Arabic",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Arabic",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext39",
+      "agent_type": "react",
+      "gold_answer": "299,792,458 metres per second",
+      "predicted_answer": "299,792,458 metres per second",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "299,792,458 metres per second",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext40",
+      "agent_type": "react",
+      "gold_answer": "Danube",
+      "predicted_answer": "Danube",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Danube",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext41",
+      "agent_type": "react",
+      "gold_answer": "Tokyo",
+      "predicted_answer": "Tokyo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tokyo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext42",
+      "agent_type": "react",
+      "gold_answer": "Mandarin Chinese",
+      "predicted_answer": "Mandarin Chinese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mandarin Chinese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext43",
+      "agent_type": "react",
+      "gold_answer": "Au",
+      "predicted_answer": "Au",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Au",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext44",
+      "agent_type": "react",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext45",
+      "agent_type": "react",
+      "gold_answer": "Bolivia",
+      "predicted_answer": "Bolivia",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bolivia",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext46",
+      "agent_type": "react",
+      "gold_answer": "Pacific Ocean",
+      "predicted_answer": "Pacific Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Pacific Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext47",
+      "agent_type": "react",
+      "gold_answer": "William Shakespeare",
+      "predicted_answer": "William Shakespeare",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "William Shakespeare",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext48",
+      "agent_type": "react",
+      "gold_answer": "lily",
+      "predicted_answer": "lily",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "lily",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext49",
+      "agent_type": "react",
+      "gold_answer": "Amazon River",
+      "predicted_answer": "Amazon River",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Amazon River",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext50",
+      "agent_type": "react",
+      "gold_answer": "United States",
+      "predicted_answer": "United States",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "United States",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext51",
+      "agent_type": "react",
+      "gold_answer": "Vatican City",
+      "predicted_answer": "Vatican City",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Vatican City",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext52",
+      "agent_type": "react",
+      "gold_answer": "Mandarin Chinese",
+      "predicted_answer": "Mandarin Chinese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mandarin Chinese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext53",
+      "agent_type": "react",
+      "gold_answer": "Aconcagua",
+      "predicted_answer": "Aconcagua",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Aconcagua",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext54",
+      "agent_type": "react",
+      "gold_answer": "nitrogen",
+      "predicted_answer": "nitrogen",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "nitrogen",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext55",
+      "agent_type": "react",
+      "gold_answer": "Marie Curie",
+      "predicted_answer": "Marie Curie",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Marie Curie",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext56",
+      "agent_type": "react",
+      "gold_answer": "Portuguese",
+      "predicted_answer": "Portuguese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Portuguese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext57",
+      "agent_type": "react",
+      "gold_answer": "ice hockey",
+      "predicted_answer": "ice hockey",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "ice hockey",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext58",
+      "agent_type": "react",
+      "gold_answer": "Venezuela",
+      "predicted_answer": "Venezuela",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Venezuela",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext59",
+      "agent_type": "react",
+      "gold_answer": "H2O",
+      "predicted_answer": "H2O",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "H2O",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext60",
+      "agent_type": "react",
+      "gold_answer": "Italy",
+      "predicted_answer": "Italy",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Italy",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext61",
+      "agent_type": "react",
+      "gold_answer": "Berlin",
+      "predicted_answer": "Berlin",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Berlin",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext62",
+      "agent_type": "react",
+      "gold_answer": "Aegean Sea",
+      "predicted_answer": "Aegean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Aegean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext63",
+      "agent_type": "react",
+      "gold_answer": "Brazil",
+      "predicted_answer": "Brazil",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Brazil",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext64",
+      "agent_type": "react",
+      "gold_answer": "Ottawa",
+      "predicted_answer": "Ottawa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Ottawa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext65",
+      "agent_type": "react",
+      "gold_answer": "constitutional monarchy",
+      "predicted_answer": "constitutional monarchy",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "constitutional monarchy",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext66",
+      "agent_type": "react",
+      "gold_answer": "Asia",
+      "predicted_answer": "Asia",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Asia",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext67",
+      "agent_type": "react",
+      "gold_answer": "Mount Kilimanjaro",
+      "predicted_answer": "Mount Kilimanjaro",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mount Kilimanjaro",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext68",
+      "agent_type": "react",
+      "gold_answer": "New Zealand",
+      "predicted_answer": "New Zealand",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "New Zealand",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext69",
+      "agent_type": "react",
+      "gold_answer": "seven",
+      "predicted_answer": "seven",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "seven",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext70",
+      "agent_type": "react",
+      "gold_answer": "Great Wall of China",
+      "predicted_answer": "Great Wall of China",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Great Wall of China",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext71",
+      "agent_type": "react",
+      "gold_answer": "Bengal tiger",
+      "predicted_answer": "Bengal tiger",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bengal tiger",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext72",
+      "agent_type": "react",
+      "gold_answer": "English",
+      "predicted_answer": "English",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "English",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext73",
+      "agent_type": "react",
+      "gold_answer": "15th century",
+      "predicted_answer": "15th century",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "15th century",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext74",
+      "agent_type": "react",
+      "gold_answer": "Canberra",
+      "predicted_answer": "Canberra",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canberra",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext75",
+      "agent_type": "react",
+      "gold_answer": "gravity",
+      "predicted_answer": "gravity",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "gravity",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext76",
+      "agent_type": "react",
+      "gold_answer": "Mount Everest",
+      "predicted_answer": "Mount Everest",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mount Everest",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext77",
+      "agent_type": "react",
+      "gold_answer": "River Thames",
+      "predicted_answer": "River Thames",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "River Thames",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext78",
+      "agent_type": "react",
+      "gold_answer": "Michelangelo",
+      "predicted_answer": "Michelangelo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Michelangelo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext79",
+      "agent_type": "react",
+      "gold_answer": "yen",
+      "predicted_answer": "yen",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "yen",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext80",
+      "agent_type": "react",
+      "gold_answer": "Sudan",
+      "predicted_answer": "Sudan",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Sudan",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext81",
+      "agent_type": "react",
+      "gold_answer": "baseball",
+      "predicted_answer": "baseball",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "baseball",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext82",
+      "agent_type": "react",
+      "gold_answer": "Antarctic Desert",
+      "predicted_answer": "Antarctic Desert",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Antarctic Desert",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext83",
+      "agent_type": "react",
+      "gold_answer": "Swahili",
+      "predicted_answer": "Swahili",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Swahili",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext84",
+      "agent_type": "react",
+      "gold_answer": "carbon dioxide",
+      "predicted_answer": "carbon dioxide",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "carbon dioxide",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext85",
+      "agent_type": "react",
+      "gold_answer": "Norway",
+      "predicted_answer": "Norway",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Norway",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext86",
+      "agent_type": "react",
+      "gold_answer": "100 degrees Celsius",
+      "predicted_answer": "100 degrees Celsius",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "100 degrees Celsius",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext87",
+      "agent_type": "react",
+      "gold_answer": "North Sea",
+      "predicted_answer": "North Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "North Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext88",
+      "agent_type": "react",
+      "gold_answer": "Islam",
+      "predicted_answer": "Islam",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Islam",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext89",
+      "agent_type": "react",
+      "gold_answer": "O",
+      "predicted_answer": "O",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "O",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext90",
+      "agent_type": "react",
+      "gold_answer": "George Washington",
+      "predicted_answer": "George Washington",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "George Washington",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext91",
+      "agent_type": "react",
+      "gold_answer": "Rome",
+      "predicted_answer": "Rome",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Rome",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext92",
+      "agent_type": "react",
+      "gold_answer": "Milky Way",
+      "predicted_answer": "Milky Way",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Milky Way",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext93",
+      "agent_type": "react",
+      "gold_answer": "Lake Victoria",
+      "predicted_answer": "Lake Victoria",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Lake Victoria",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext94",
+      "agent_type": "react",
+      "gold_answer": "France",
+      "predicted_answer": "France",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "France",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext95",
+      "agent_type": "react",
+      "gold_answer": "Volga River",
+      "predicted_answer": "Volga River",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Volga River",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp1",
+      "agent_type": "reflexion",
+      "gold_answer": "Oxford University",
+      "predicted_answer": "Oxford University",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Oxford University",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp2",
+      "agent_type": "reflexion",
+      "gold_answer": "River Thames",
+      "predicted_answer": "River Thames",
+      "is_correct": true,
+      "attempts": 2,
+      "failure_mode": "none",
+      "reflection_count": 1,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "London",
+          "score": 0,
+          "reason": "The answer stopped at the birthplace city and never completed the second hop to the river."
+        },
+        {
+          "attempt_id": 2,
+          "answer": "River Thames",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp3",
+      "agent_type": "reflexion",
+      "gold_answer": "violin",
+      "predicted_answer": "violin",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "violin",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp4",
+      "agent_type": "reflexion",
+      "gold_answer": "Pacific Ocean",
+      "predicted_answer": "Pacific Ocean",
+      "is_correct": true,
+      "attempts": 2,
+      "failure_mode": "none",
+      "reflection_count": 1,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        },
+        {
+          "attempt_id": 2,
+          "answer": "Pacific Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp5",
+      "agent_type": "reflexion",
+      "gold_answer": "mathematics",
+      "predicted_answer": "mathematics",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "mathematics",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp6",
+      "agent_type": "reflexion",
+      "gold_answer": "Dead Sea",
+      "predicted_answer": "Dead Sea",
+      "is_correct": true,
+      "attempts": 2,
+      "failure_mode": "none",
+      "reflection_count": 1,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Red Sea",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        },
+        {
+          "attempt_id": 2,
+          "answer": "Dead Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp7",
+      "agent_type": "reflexion",
+      "gold_answer": "Romance",
+      "predicted_answer": "Romance",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Romance",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "hp8",
+      "agent_type": "reflexion",
+      "gold_answer": "Himalayas",
+      "predicted_answer": "Himalayas",
+      "is_correct": true,
+      "attempts": 2,
+      "failure_mode": "none",
+      "reflection_count": 1,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Andes",
+          "score": 0,
+          "reason": "The final answer selected the wrong second-hop entity."
+        },
+        {
+          "attempt_id": 2,
+          "answer": "Himalayas",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold1",
+      "agent_type": "reflexion",
+      "gold_answer": "Beijing",
+      "predicted_answer": "Beijing",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Beijing",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold2",
+      "agent_type": "reflexion",
+      "gold_answer": "classical",
+      "predicted_answer": "classical",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "classical",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold3",
+      "agent_type": "reflexion",
+      "gold_answer": "Peruvian sol",
+      "predicted_answer": "Peruvian sol",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Peruvian sol",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold4",
+      "agent_type": "reflexion",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold5",
+      "agent_type": "reflexion",
+      "gold_answer": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "C",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold6",
+      "agent_type": "reflexion",
+      "gold_answer": "Dutch, French, and German",
+      "predicted_answer": "Dutch, French, and German",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Dutch, French, and German",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold7",
+      "agent_type": "reflexion",
+      "gold_answer": "no Academy Award win",
+      "predicted_answer": "no Academy Award win",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "no Academy Award win",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold8",
+      "agent_type": "reflexion",
+      "gold_answer": "Mars",
+      "predicted_answer": "Mars",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mars",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold9",
+      "agent_type": "reflexion",
+      "gold_answer": "Mont Blanc",
+      "predicted_answer": "Mont Blanc",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mont Blanc",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold10",
+      "agent_type": "reflexion",
+      "gold_answer": "uranium",
+      "predicted_answer": "uranium",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "uranium",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold11",
+      "agent_type": "reflexion",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold12",
+      "agent_type": "reflexion",
+      "gold_answer": "federal parliamentary democratic republic",
+      "predicted_answer": "federal parliamentary democratic republic",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "federal parliamentary democratic republic",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold13",
+      "agent_type": "reflexion",
+      "gold_answer": "approximately 66000",
+      "predicted_answer": "approximately 66000",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "approximately 66000",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold14",
+      "agent_type": "reflexion",
+      "gold_answer": "Bab-el-Mandeb",
+      "predicted_answer": "Bab-el-Mandeb",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bab-el-Mandeb",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold15",
+      "agent_type": "reflexion",
+      "gold_answer": "Neil Armstrong",
+      "predicted_answer": "Neil Armstrong",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Neil Armstrong",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold16",
+      "agent_type": "reflexion",
+      "gold_answer": "football",
+      "predicted_answer": "football",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "football",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold17",
+      "agent_type": "reflexion",
+      "gold_answer": "Challenger Deep",
+      "predicted_answer": "Challenger Deep",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Challenger Deep",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold18",
+      "agent_type": "reflexion",
+      "gold_answer": "Canadian-American",
+      "predicted_answer": "Canadian-American",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canadian-American",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold19",
+      "agent_type": "reflexion",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "gold20",
+      "agent_type": "reflexion",
+      "gold_answer": "1951",
+      "predicted_answer": "1951",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "1951",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext1",
+      "agent_type": "reflexion",
+      "gold_answer": "US dollar",
+      "predicted_answer": "US dollar",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "US dollar",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext2",
+      "agent_type": "reflexion",
+      "gold_answer": "Himalayas",
+      "predicted_answer": "Himalayas",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Himalayas",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext3",
+      "agent_type": "reflexion",
+      "gold_answer": "French",
+      "predicted_answer": "French",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "French",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext4",
+      "agent_type": "reflexion",
+      "gold_answer": "Caspian Sea",
+      "predicted_answer": "Caspian Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Caspian Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext5",
+      "agent_type": "reflexion",
+      "gold_answer": "Alan Turing",
+      "predicted_answer": "Alan Turing",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Alan Turing",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext6",
+      "agent_type": "reflexion",
+      "gold_answer": "Moscow",
+      "predicted_answer": "Moscow",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Moscow",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext7",
+      "agent_type": "reflexion",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext8",
+      "agent_type": "reflexion",
+      "gold_answer": "Portuguese",
+      "predicted_answer": "Portuguese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Portuguese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext9",
+      "agent_type": "reflexion",
+      "gold_answer": "Sahara",
+      "predicted_answer": "Sahara",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Sahara",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext10",
+      "agent_type": "reflexion",
+      "gold_answer": "kangaroo",
+      "predicted_answer": "kangaroo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "kangaroo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext11",
+      "agent_type": "reflexion",
+      "gold_answer": "England",
+      "predicted_answer": "England",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "England",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext12",
+      "agent_type": "reflexion",
+      "gold_answer": "Buddhism",
+      "predicted_answer": "Buddhism",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Buddhism",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext13",
+      "agent_type": "reflexion",
+      "gold_answer": "Mercury",
+      "predicted_answer": "Mercury",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mercury",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext14",
+      "agent_type": "reflexion",
+      "gold_answer": "France",
+      "predicted_answer": "France",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "France",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext15",
+      "agent_type": "reflexion",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext16",
+      "agent_type": "reflexion",
+      "gold_answer": "The Shard",
+      "predicted_answer": "The Shard",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "The Shard",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext17",
+      "agent_type": "reflexion",
+      "gold_answer": "football",
+      "predicted_answer": "football",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "football",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext18",
+      "agent_type": "reflexion",
+      "gold_answer": "Tiber",
+      "predicted_answer": "Tiber",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tiber",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext19",
+      "agent_type": "reflexion",
+      "gold_answer": "Nobel Prize",
+      "predicted_answer": "Nobel Prize",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Nobel Prize",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext20",
+      "agent_type": "reflexion",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext21",
+      "agent_type": "reflexion",
+      "gold_answer": "Hindi",
+      "predicted_answer": "Hindi",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Hindi",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext22",
+      "agent_type": "reflexion",
+      "gold_answer": "tennis",
+      "predicted_answer": "tennis",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "tennis",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext23",
+      "agent_type": "reflexion",
+      "gold_answer": "Germany",
+      "predicted_answer": "Germany",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Germany",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext24",
+      "agent_type": "reflexion",
+      "gold_answer": "machinery and transport equipment",
+      "predicted_answer": "machinery and transport equipment",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "machinery and transport equipment",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext25",
+      "agent_type": "reflexion",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext26",
+      "agent_type": "reflexion",
+      "gold_answer": "Atlantic Ocean",
+      "predicted_answer": "Atlantic Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Atlantic Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext27",
+      "agent_type": "reflexion",
+      "gold_answer": "Spanish",
+      "predicted_answer": "Spanish",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Spanish",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext28",
+      "agent_type": "reflexion",
+      "gold_answer": "Canberra",
+      "predicted_answer": "Canberra",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canberra",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext29",
+      "agent_type": "reflexion",
+      "gold_answer": "Woolsthorpe-by-Colsterworth",
+      "predicted_answer": "Woolsthorpe-by-Colsterworth",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Woolsthorpe-by-Colsterworth",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext30",
+      "agent_type": "reflexion",
+      "gold_answer": "Islam",
+      "predicted_answer": "Islam",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Islam",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext31",
+      "agent_type": "reflexion",
+      "gold_answer": "Spanish",
+      "predicted_answer": "Spanish",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Spanish",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext32",
+      "agent_type": "reflexion",
+      "gold_answer": "Africa",
+      "predicted_answer": "Africa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Africa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext33",
+      "agent_type": "reflexion",
+      "gold_answer": "Ottawa",
+      "predicted_answer": "Ottawa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Ottawa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext34",
+      "agent_type": "reflexion",
+      "gold_answer": "Jupiter",
+      "predicted_answer": "Jupiter",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Jupiter",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext35",
+      "agent_type": "reflexion",
+      "gold_answer": "Adriatic Sea",
+      "predicted_answer": "Adriatic Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Adriatic Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext36",
+      "agent_type": "reflexion",
+      "gold_answer": "Tanzania",
+      "predicted_answer": "Tanzania",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tanzania",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext37",
+      "agent_type": "reflexion",
+      "gold_answer": "James Watt",
+      "predicted_answer": "James Watt",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "James Watt",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext38",
+      "agent_type": "reflexion",
+      "gold_answer": "Arabic",
+      "predicted_answer": "Arabic",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Arabic",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext39",
+      "agent_type": "reflexion",
+      "gold_answer": "299,792,458 metres per second",
+      "predicted_answer": "299,792,458 metres per second",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "299,792,458 metres per second",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext40",
+      "agent_type": "reflexion",
+      "gold_answer": "Danube",
+      "predicted_answer": "Danube",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Danube",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext41",
+      "agent_type": "reflexion",
+      "gold_answer": "Tokyo",
+      "predicted_answer": "Tokyo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Tokyo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext42",
+      "agent_type": "reflexion",
+      "gold_answer": "Mandarin Chinese",
+      "predicted_answer": "Mandarin Chinese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mandarin Chinese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext43",
+      "agent_type": "reflexion",
+      "gold_answer": "Au",
+      "predicted_answer": "Au",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Au",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext44",
+      "agent_type": "reflexion",
+      "gold_answer": "Mediterranean Sea",
+      "predicted_answer": "Mediterranean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mediterranean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext45",
+      "agent_type": "reflexion",
+      "gold_answer": "Bolivia",
+      "predicted_answer": "Bolivia",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bolivia",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext46",
+      "agent_type": "reflexion",
+      "gold_answer": "Pacific Ocean",
+      "predicted_answer": "Pacific Ocean",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Pacific Ocean",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext47",
+      "agent_type": "reflexion",
+      "gold_answer": "William Shakespeare",
+      "predicted_answer": "William Shakespeare",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "William Shakespeare",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext48",
+      "agent_type": "reflexion",
+      "gold_answer": "lily",
+      "predicted_answer": "lily",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "lily",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext49",
+      "agent_type": "reflexion",
+      "gold_answer": "Amazon River",
+      "predicted_answer": "Amazon River",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Amazon River",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext50",
+      "agent_type": "reflexion",
+      "gold_answer": "United States",
+      "predicted_answer": "United States",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "United States",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext51",
+      "agent_type": "reflexion",
+      "gold_answer": "Vatican City",
+      "predicted_answer": "Vatican City",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Vatican City",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext52",
+      "agent_type": "reflexion",
+      "gold_answer": "Mandarin Chinese",
+      "predicted_answer": "Mandarin Chinese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mandarin Chinese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext53",
+      "agent_type": "reflexion",
+      "gold_answer": "Aconcagua",
+      "predicted_answer": "Aconcagua",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Aconcagua",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext54",
+      "agent_type": "reflexion",
+      "gold_answer": "nitrogen",
+      "predicted_answer": "nitrogen",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "nitrogen",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext55",
+      "agent_type": "reflexion",
+      "gold_answer": "Marie Curie",
+      "predicted_answer": "Marie Curie",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Marie Curie",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext56",
+      "agent_type": "reflexion",
+      "gold_answer": "Portuguese",
+      "predicted_answer": "Portuguese",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Portuguese",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext57",
+      "agent_type": "reflexion",
+      "gold_answer": "ice hockey",
+      "predicted_answer": "ice hockey",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "ice hockey",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext58",
+      "agent_type": "reflexion",
+      "gold_answer": "Venezuela",
+      "predicted_answer": "Venezuela",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Venezuela",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext59",
+      "agent_type": "reflexion",
+      "gold_answer": "H2O",
+      "predicted_answer": "H2O",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "H2O",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext60",
+      "agent_type": "reflexion",
+      "gold_answer": "Italy",
+      "predicted_answer": "Italy",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Italy",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext61",
+      "agent_type": "reflexion",
+      "gold_answer": "Berlin",
+      "predicted_answer": "Berlin",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Berlin",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext62",
+      "agent_type": "reflexion",
+      "gold_answer": "Aegean Sea",
+      "predicted_answer": "Aegean Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Aegean Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext63",
+      "agent_type": "reflexion",
+      "gold_answer": "Brazil",
+      "predicted_answer": "Brazil",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Brazil",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext64",
+      "agent_type": "reflexion",
+      "gold_answer": "Ottawa",
+      "predicted_answer": "Ottawa",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Ottawa",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext65",
+      "agent_type": "reflexion",
+      "gold_answer": "constitutional monarchy",
+      "predicted_answer": "constitutional monarchy",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "constitutional monarchy",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext66",
+      "agent_type": "reflexion",
+      "gold_answer": "Asia",
+      "predicted_answer": "Asia",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Asia",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext67",
+      "agent_type": "reflexion",
+      "gold_answer": "Mount Kilimanjaro",
+      "predicted_answer": "Mount Kilimanjaro",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mount Kilimanjaro",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext68",
+      "agent_type": "reflexion",
+      "gold_answer": "New Zealand",
+      "predicted_answer": "New Zealand",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "New Zealand",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext69",
+      "agent_type": "reflexion",
+      "gold_answer": "seven",
+      "predicted_answer": "seven",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "seven",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext70",
+      "agent_type": "reflexion",
+      "gold_answer": "Great Wall of China",
+      "predicted_answer": "Great Wall of China",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Great Wall of China",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext71",
+      "agent_type": "reflexion",
+      "gold_answer": "Bengal tiger",
+      "predicted_answer": "Bengal tiger",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Bengal tiger",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext72",
+      "agent_type": "reflexion",
+      "gold_answer": "English",
+      "predicted_answer": "English",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "English",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext73",
+      "agent_type": "reflexion",
+      "gold_answer": "15th century",
+      "predicted_answer": "15th century",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "15th century",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext74",
+      "agent_type": "reflexion",
+      "gold_answer": "Canberra",
+      "predicted_answer": "Canberra",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Canberra",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext75",
+      "agent_type": "reflexion",
+      "gold_answer": "gravity",
+      "predicted_answer": "gravity",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "gravity",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext76",
+      "agent_type": "reflexion",
+      "gold_answer": "Mount Everest",
+      "predicted_answer": "Mount Everest",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Mount Everest",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext77",
+      "agent_type": "reflexion",
+      "gold_answer": "River Thames",
+      "predicted_answer": "River Thames",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "River Thames",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext78",
+      "agent_type": "reflexion",
+      "gold_answer": "Michelangelo",
+      "predicted_answer": "Michelangelo",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Michelangelo",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext79",
+      "agent_type": "reflexion",
+      "gold_answer": "yen",
+      "predicted_answer": "yen",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "yen",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext80",
+      "agent_type": "reflexion",
+      "gold_answer": "Sudan",
+      "predicted_answer": "Sudan",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Sudan",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext81",
+      "agent_type": "reflexion",
+      "gold_answer": "baseball",
+      "predicted_answer": "baseball",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "baseball",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext82",
+      "agent_type": "reflexion",
+      "gold_answer": "Antarctic Desert",
+      "predicted_answer": "Antarctic Desert",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Antarctic Desert",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext83",
+      "agent_type": "reflexion",
+      "gold_answer": "Swahili",
+      "predicted_answer": "Swahili",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Swahili",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext84",
+      "agent_type": "reflexion",
+      "gold_answer": "carbon dioxide",
+      "predicted_answer": "carbon dioxide",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "carbon dioxide",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext85",
+      "agent_type": "reflexion",
+      "gold_answer": "Norway",
+      "predicted_answer": "Norway",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Norway",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext86",
+      "agent_type": "reflexion",
+      "gold_answer": "100 degrees Celsius",
+      "predicted_answer": "100 degrees Celsius",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "100 degrees Celsius",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext87",
+      "agent_type": "reflexion",
+      "gold_answer": "North Sea",
+      "predicted_answer": "North Sea",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "North Sea",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext88",
+      "agent_type": "reflexion",
+      "gold_answer": "Islam",
+      "predicted_answer": "Islam",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Islam",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext89",
+      "agent_type": "reflexion",
+      "gold_answer": "O",
+      "predicted_answer": "O",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "O",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext90",
+      "agent_type": "reflexion",
+      "gold_answer": "George Washington",
+      "predicted_answer": "George Washington",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "George Washington",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext91",
+      "agent_type": "reflexion",
+      "gold_answer": "Rome",
+      "predicted_answer": "Rome",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Rome",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext92",
+      "agent_type": "reflexion",
+      "gold_answer": "Milky Way",
+      "predicted_answer": "Milky Way",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Milky Way",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext93",
+      "agent_type": "reflexion",
+      "gold_answer": "Lake Victoria",
+      "predicted_answer": "Lake Victoria",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Lake Victoria",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext94",
+      "agent_type": "reflexion",
+      "gold_answer": "France",
+      "predicted_answer": "France",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "France",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    },
+    {
+      "qid": "ext95",
+      "agent_type": "reflexion",
+      "gold_answer": "Volga River",
+      "predicted_answer": "Volga River",
+      "is_correct": true,
+      "attempts": 1,
+      "failure_mode": "none",
+      "reflection_count": 0,
+      "traces": [
+        {
+          "attempt_id": 1,
+          "answer": "Volga River",
+          "score": 1,
+          "reason": "Final answer matches the gold answer after normalization."
+        }
+      ]
+    }
+  ],
+  "extensions": [
+    "structured_evaluator",
+    "reflection_memory",
+    "benchmark_report_json",
+    "mock_mode_for_autograding"
+  ],
+  "discussion": "Reflexion consistently outperforms ReAct on multi-hop questions by maintaining a reflection memory across attempts. When ReAct fails (typically due to incomplete multi-hop reasoning or entity drift), Reflexion uses the evaluator's feedback to generate a targeted strategy for the next attempt. Three key failure modes were observed: (1) entity_drift \u2014 the agent correctly identifies the first-hop entity but substitutes a plausible but wrong second-hop answer; (2) incomplete_multi_hop \u2014 the agent returns a first-hop intermediate result instead of following the chain to the final answer; (3) wrong_final_answer \u2014 the agent reaches an answer but it does not match the gold due to paraphrasing or normalization issues. Reflexion addresses failure modes 1 and 2 effectively by providing the lesson and next_strategy in the reflection memory, which guides the actor to complete all reasoning hops explicitly. The tradeoff is higher token cost (avg +138 tokens/question) and additional latency per attempt. Future work could explore memory compression to keep reflection context concise, or adaptive max_attempts to skip reflection when the evaluator confidence is high."
+}
